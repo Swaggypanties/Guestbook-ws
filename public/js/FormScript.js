@@ -11,7 +11,7 @@ document.getElementById('guestbook-form').addEventListener('submit', function(ev
     };
 
     // Use fetch to send the data to the backend (Express)
-    fetch('/ajaxmessage', {
+    fetch('/newmessage', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
