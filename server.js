@@ -30,7 +30,7 @@ app.get('/guestbook', (req, res) => {
         if (err) return res.status(500).send("Error reading messages.");
 
         const messages = JSON.parse(data);
-        res.render('guestbook', { messages }); // Renders 'guestbook.ejs' with message data
+        res.render('guestbook', { messages }); // Renders 'guestbook.ejs' with messages
     });
 });
 
@@ -47,11 +47,11 @@ app.post('/newmessage', (req, res) => {
         message: req.body.message,
         timestamp: new Date()
     };
-
+    // Read existing messages from the file
     fs.readFile('guestbookdata.json', 'utf8', (err, data) => {
         const messages = err ? [] : JSON.parse(data);
         messages.push(newMessage);
-
+    // Write the updated messages back to the file
         fs.writeFile('guestbookdata.json', JSON.stringify(messages), (err) => {
             if (err) return res.status(500).send("Error saving message.");
             res.redirect('/guestbook'); // Redirect to the guestbook page
@@ -64,7 +64,6 @@ app.get('/ajaxmessage', (req, res) => {
     res.sendFile(path.join(__dirname,'public', 'ajaxmessageform.html'));
 });
 
-// Handles the Ajax message submissions
 // Handles the Ajax message submissions
 app.post('/ajaxmessage', (req, res) => {
     const newMessage = {
