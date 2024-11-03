@@ -5,9 +5,13 @@ const path = require('path');
 
 const app = express();
 
+let messages = [];
+
 // Set up EJS
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+
 
 // Middleware
 app.use(bodyParser.json());
@@ -61,6 +65,7 @@ app.get('/ajaxmessage', (req, res) => {
 });
 
 // Handles the Ajax message submissions
+// Handles the Ajax message submissions
 app.post('/ajaxmessage', (req, res) => {
     const newMessage = {
         username: req.body.username,
@@ -69,16 +74,19 @@ app.post('/ajaxmessage', (req, res) => {
         timestamp: new Date()
     };
 
-    fs.readFile('guestbookdata.json', 'utf8', (err, data) => {
+    // Read existing messages from the file
+    fs.readFile('ajaxmessage.json', 'utf8', (err, data) => {
         const messages = err ? [] : JSON.parse(data);
-        messages.push(newMessage);
+        messages.push(newMessage);  // Add the new message
 
-        fs.writeFile('guestbookdata.json', JSON.stringify(messages), (err) => {
+        // Write the updated messages back to the file
+        fs.writeFile('ajaxmessage.json', JSON.stringify(messages), (err) => {
             if (err) return res.status(500).send("Error saving message.");
-            res.json(messages); // Respond with updated messages as JSON for Ajax
+            res.json(messages);  // Send updated messages back to the client
         });
     });
 });
+
 
 // Starts the server
 app.listen(3000, () => {

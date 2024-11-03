@@ -15,7 +15,7 @@ document.getElementById('ajax-form').addEventListener('submit', function (event)
     .then(response => response.json())
     .then(messages => {
         const messageList = document.getElementById('messageList');
-        messageList.innerHTML = '';  // Clear existing messages and placeholder
+        messageList.innerHTML = '';  // Clear existing messages
 
         if (messages.length === 0) {
             messageList.innerHTML = '<p class="text-muted">No messages yet. Be the first to leave one!</p>';
