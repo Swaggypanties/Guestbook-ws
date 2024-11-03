@@ -18,7 +18,7 @@ document.getElementById('ajax-form').addEventListener('submit', function (event)
         messageList.innerHTML = '';  // Clear existing messages
 
         if (messages.length === 0) {
-            messageList.innerHTML = '<p class="text-muted">No messages yet. Be the first to leave one!</p>';
+            messageList.innerHTML = '<p>No messages yet. Be the first to leave one!</p>';
         } else {
             messages.forEach(msg => {
                 const messageElement = document.createElement('div');
