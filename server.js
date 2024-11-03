@@ -5,8 +5,6 @@ const path = require('path');
 
 const app = express();
 
-let messages = [];
-
 // Set up EJS
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
