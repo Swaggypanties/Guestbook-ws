@@ -52,7 +52,7 @@ app.post('/newmessage', (req, res) => {
     // Write the updated messages back to the file
         fs.writeFile('guestbookdata.json', JSON.stringify(messages), (err) => {
             if (err) return res.status(500).send("Error saving message.");
-            res.redirect('/guestbook'); // Redirect to the guestbook page
+            res.json({ message: "Message saved successfully!" }); // Redirect to the guestbook page
         });
     });
 });

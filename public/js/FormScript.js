@@ -22,6 +22,7 @@ document.getElementById('guestbook-form').addEventListener('submit', function(ev
     .then(data => {
         console.log('Success:', data);
         alert('Message sent successfully!');
+        document.getElementById('guestbook-form').reset();
     })
     .catch((error) => {
         console.error('Error:', error);
